@@ -12,7 +12,7 @@ class ProductController extends Controller
     {
         $products = Product::select([
             'id', 'name', 'slug', 'tagline', 'base_price',
-            'color_accent', 'badge', 'is_featured', 'variants', 'colors',
+            'color_accent', 'badge', 'is_featured', 'variants', 'colors', 'accessories',
         ])->get();
 
         return Inertia::render('Products/Index', [

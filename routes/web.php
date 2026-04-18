@@ -13,15 +13,15 @@ Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'verified', 'admin'])
     ->group(function () {
- 
+
         // Dashboard
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
- 
+
         // Orders
         Route::get('/orders',              [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/orders/{order}',      [AdminOrderController::class, 'show'])->name('orders.show');
         Route::patch('/orders/{order}',    [AdminOrderController::class, 'update'])->name('orders.update');
- 
+
         // Products
         Route::get('/products',            [AdminProductController::class, 'index'])->name('products.index');
         Route::get('/products/create',     [AdminProductController::class, 'create'])->name('products.create');
@@ -29,7 +29,7 @@ Route::prefix('admin')
         Route::get('/products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
         Route::patch('/products/{product}',    [AdminProductController::class, 'update'])->name('products.update');
         Route::delete('/products/{product}',   [AdminProductController::class, 'destroy'])->name('products.destroy');
- 
+
         // Users
         Route::get('/users',                        [UserController::class, 'index'])->name('users.index');
         Route::get('/users/{user}',                 [UserController::class, 'show'])->name('users.show');
@@ -48,9 +48,9 @@ Route::get('/', function () {
     return Inertia::render('Home');
 })->name('home');
 
-Route::get('/phones', [AdminProductController::class, 'index'])->name('phones');
+Route::get('/phones', [ProductController::class, 'index'])->name('phones');
 // Individual product pages — /phones/nova, /phones/flip, /phones/zero, etc.
-Route::get('/phones/{product:slug}', [AdminProductController::class, 'show'])->name('phones.show');
+Route::get('/phones/{product:slug}', [ProductController::class, 'show'])->name('phones.show');
 
 // Auth-required routes (Breeze provides /login, /register, /logout)
 Route::middleware(['auth', 'verified'])->group(function () {

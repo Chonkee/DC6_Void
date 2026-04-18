@@ -10,10 +10,7 @@ class EnsureUserIsAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->user() || ! $request->user()->isAdmin()) {
-            if ($request->expectsJson() || $request->header('X-Inertia')) {
-                return response()->json(['message' => 'Forbidden.'], 403);
-            }
+        if (! $request->user() || ! $request->user()->is_admin) {
             abort(403, 'Access denied. Admin only.');
         }
 

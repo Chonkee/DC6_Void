@@ -136,6 +136,11 @@ function Navbar({ transparent, auth }) {
                                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 01-8 0" />
                             </svg>
                         </Link>
+                        {auth.user.is_admin && (
+                            <Link href="/admin" style={{ padding: '8px 14px', borderRadius: 10, fontSize: 13, fontWeight: 600, background: 'rgba(200,255,100,0.1)', border: '1px solid rgba(200,255,100,0.3)', color: '#C8FF64', transition: 'all 0.2s', textDecoration: 'none' }}>
+                                Admin
+                            </Link>
+                        )}
                         <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--accent-dim)', border: '1px solid rgba(200,255,100,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: 'var(--accent)', cursor: 'pointer' }}>
                             {auth.user.name.charAt(0).toUpperCase()}
                         </div>

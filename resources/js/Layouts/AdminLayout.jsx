@@ -147,7 +147,7 @@ export default function AdminLayout({ children, title }) {
                 {/* Top bar */}
                 <header style={{ height: 64, borderBottom: '1px solid rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', padding: '0 32px', background: 'rgba(12,12,20,0.8)', backdropFilter: 'blur(20px)', position: 'sticky', top: 0, zIndex: 50 }}>
                     <h1 style={{ fontSize: 16, fontWeight: 800, color: '#fff', letterSpacing: -0.5 }}>{title}</h1>
-                    <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 16 }}>
                         <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'rgba(200,255,100,0.15)', border: '1px solid rgba(200,255,100,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#C8FF64' }}>
                             {auth?.user?.name?.charAt(0).toUpperCase()}
                         </div>
