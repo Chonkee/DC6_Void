@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --black:  #06060A;
+    --dark:   #0C0C14;
+    --card:   #0F0F1A;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --accent: #C8FF64;
+    --accent-dim: rgba(200,255,100,0.15);
+    --white:  #F0EDE8;
+    --muted:  rgba(240,237,232,0.45);
+    --muted2: rgba(240,237,232,0.25);
+    --muted3: rgba(240,237,232,0.1);
+    --red:    #FF5A5A;
+    --blue:   #6496FF;
+    --amber:  #FFB432;
+    --nova:   #64C8FF;
+    --nova-dim: rgba(100,200,255,0.12);
+    --flip:   #C864FF;
+    --flip-dim: rgba(200,100,255,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(200,255,100,0.2); color: #fff; }
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: rgba(200,255,100,0.18); border-radius: 2px; }
+  a { text-decoration: none; color: inherit; }
+  button { font-family: 'Syne', sans-serif; cursor: pointer; border: none; outline: none; }
+  input, select, textarea { font-family: 'Syne', sans-serif; outline: none; }
+}
+
+@layer components {
+  /* ---- NAVBAR ---- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    height: 64px; padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.4s ease;
+  }
+  .nav.scrolled, .nav.opaque {
+    background: rgba(6,6,10,0.94);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ---- MEGA MENU ---- */
+  .mega-menu {
+    position: absolute; top: calc(100% + 8px); left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    width: 860px;
+    background: rgba(10,10,18,0.97);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 24px;
+    opacity: 0; visibility: hidden;
+    transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  }
+  .nav-item:hover .mega-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+  /* ---- SECTIONS ---- */
+  .sec { padding: 112px 0; }
+  .sec-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+  /* ---- CARDS ---- */
+  .f-card {
+    border: 1px solid var(--border); border-radius: 24px;
+    background: var(--card); padding: 32px;
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s;
+  }
+  .f-card:hover { border-color: var(--border-hover); }
+  .f-card.vis { opacity: 1; transform: translateY(0); }
+
+  /* ---- SPEC GRID ---- */
+  .sg {
+    border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
+  }
+  .sg:hover { border-color: var(--border-hover); }
+  .sg.vis { opacity: 1; transform: translateY(0); }
+
+  /* ---- BUTTONS ---- */
+  .btn-primary {
+    background: var(--accent); color: #000;
+    padding: 14px 32px; border-radius: 100px;
+    font-weight: 700; font-size: 14px;
+    transition: background 0.2s; cursor: pointer; border: none;
+    font-family: 'Syne', sans-serif;
+  }
+  .btn-primary:hover { background: #fff; }
+  .btn-ghost {
+    background: rgba(255,255,255,0.05); color: var(--muted);
+    padding: 14px 32px; border-radius: 100px;
+    font-weight: 600; font-size: 14px; border: 1px solid var(--border);
+    transition: all 0.2s; cursor: pointer; font-family: 'Syne', sans-serif;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.09); color: #fff; border-color: var(--border-hover); }
+
+  /* ---- AUTH ---- */
+  .auth-box {
+    position: relative; z-index: 2; width: 100%; max-width: 440px;
+    background: rgba(10,10,18,0.9); border: 1px solid var(--border);
+    border-radius: 28px; padding: 44px; backdrop-filter: blur(20px);
+  }
+  .form-input {
+    width: 100%; padding: 13px 16px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 12px; color: #fff; font-size: 14px; transition: all 0.2s;
+  }
+  .form-input:focus { border-color: rgba(200,255,100,0.4); background: rgba(200,255,100,0.03); }
+  .form-input::placeholder { color: rgba(255,255,255,0.22); }
+  .btn-form {
+    width: 100%; padding: 14px; border-radius: 12px;
+    background: var(--accent); color: #000; font-weight: 700;
+    font-size: 14px; transition: background 0.2s; border: none; cursor: pointer;
+    font-family: 'Syne', sans-serif;
+  }
+  .btn-form:hover { background: #fff; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; overflow: hidden; padding-top: 64px;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 40px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 64px; width: 100%;
+  }
+
+  /* ---- TOAST ---- */
+  .toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: rgba(15,15,26,0.97); border: 1px solid var(--border);
+    border-radius: 100px; padding: 12px 22px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: #fff; font-weight: 500;
+    opacity: 0; transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    backdrop-filter: blur(20px); z-index: 999; white-space: nowrap;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  /* ---- REVEAL animation ---- */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.vis { opacity: 1; transform: translateY(0); }
+
+  /* ---- PLAN CARDS ---- */
+  .plan {
+    border-radius: 26px; border: 1px solid var(--border);
+    padding: 34px; cursor: pointer; transition: all 0.3s; position: relative;
+  }
+  .plan.hot { border-color: rgba(200,255,100,0.3); background: rgba(200,255,100,0.02); }
+  .plan.sel { box-shadow: 0 0 0 1px rgba(200,255,100,0.45); }
+
+  /* ---- ORDER / TRANSACTION ---- */
+  .order-summary {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 24px; padding: 28px;
+    position: sticky; top: 84px;
+  }
+
+  /* ---- MODAL ---- */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 500; display: none; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+  }
+  .modal-overlay.open { display: flex; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; padding-top: 40px; }
+    .nav { padding: 0 20px; }
+    .mega-menu { width: calc(100vw - 32px); left: 16px; transform: none; }
+    .auth-box { padding: 28px 22px; }
+  }
+  @media (max-width: 600px) {
+    .sec-inner { padding: 0 20px; }
+  }
+}
